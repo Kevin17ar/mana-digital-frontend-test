@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, List } from "antd";
-import { useCart } from "../context/carrito";
+import { useCart } from "../context/carrito-provider";
 
 const CartModal = () => {
-  const { cart, removeFromCart,decreaseQuantity, getTotalPrice } = useCart();
+  const { cart, removeFromCart, decreaseQuantity, getTotalPrice } = useCart();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => setIsModalVisible(true);
   const handleCancel = () => setIsModalVisible(false);
-  useEffect(()=>{
-    console.log(cart)
-  },[cart])
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   return (
     <>
-      
       {cart.length > 0 && (
         <Button
           type="primary"
@@ -42,9 +41,15 @@ const CartModal = () => {
             dataSource={cart}
             renderItem={(item) => (
               <List.Item
-                style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
                   <img
                     src={item.image}
                     alt={item.title}
@@ -55,24 +60,29 @@ const CartModal = () => {
                     }}
                   />
                   <div>
-                    <p style={{ margin: 0, fontWeight: "bold",width:"70%" }}>{item.title}</p>
+                    <p style={{ margin: 0, fontWeight: "bold", width: "70%" }}>
+                      {item.title}
+                    </p>
                     <p style={{ margin: 0 }}>
                       Cantidad: {item.quantity} x ${item.price.toFixed(2)}
                     </p>
                   </div>
                 </div>
                 <div>
-                  <div style={{display:"flex"}}>
-                  <Button info onClick={()=>{decreaseQuantity(item.id)}}>
-                    Eliminar
-                </Button>
-                <Button danger onClick={() => removeFromCart(item.id)}>
-                  Cancelar
-                </Button>
+                  <div style={{ display: "flex" }}>
+                    <Button
+                      info
+                      onClick={() => {
+                        decreaseQuantity(item.id);
+                      }}
+                    >
+                      Eliminar
+                    </Button>
+                    <Button danger onClick={() => removeFromCart(item.id)}>
+                      Cancelar
+                    </Button>
                   </div>
-                
                 </div>
-                
               </List.Item>
             )}
           />
@@ -81,8 +91,13 @@ const CartModal = () => {
         )}
         {cart.length > 0 && (
           <div style={{ textAlign: "right", marginTop: "20px" }}>
-            <p style={{ fontWeight: "bold" }}>Total: ${getTotalPrice().toFixed(2)}</p>
-            <Button type="primary" onClick={() => alert("Gracias por su compra")}>
+            <p style={{ fontWeight: "bold" }}>
+              Total: ${getTotalPrice().toFixed(2)}
+            </p>
+            <Button
+              type="primary"
+              onClick={() => alert("Gracias por su compra")}
+            >
               Comprar Ahora
             </Button>
           </div>

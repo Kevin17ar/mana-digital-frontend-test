@@ -15,7 +15,7 @@ const Navbar = () => {
           />
         </Link>
       <h1>
-      ecommerce
+      Ecommerce
       </h1>
       </div>
       

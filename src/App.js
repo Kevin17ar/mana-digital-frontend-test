@@ -1,8 +1,8 @@
 import './App.css';
 import Navbar from './componentes/navbar';
 import Footer from './componentes/footer';
-import { CartProvider } from './context/carrito';
-import CartModal from './context/carritoModal';
+import { CartProvider } from './context/carrito-provider';
+import CartModal from './componentes/carritoModal';
 import AppRoutes from "./routes/Routes";
 import { BrowserRouter as Router} from "react-router-dom";
 
